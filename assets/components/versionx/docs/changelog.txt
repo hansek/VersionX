@@ -1,9 +1,11 @@
 CHANGELOG VERSIONX
 
 VersionX 1.0 Beta1 (to be released)
+===================================
 - Added Russian translation (elastic)
 
 VersionX 1.0 Alpha3 (Released 14/1/2010)
+========================================
 - [#13] Added a few more lexicon strings, improved some error handling, improved code readability
 - [#4/#6/#14] Updated grid list processor for usability (date formatting, boolean is now yes/no, editedby (and similar) now gives users full name, template shows template name..
 - [#11] Increased width of modal windows. Moved content to its own tab in view details window.
@@ -16,6 +18,7 @@ VersionX 1.0 Alpha3 (Released 14/1/2010)
 - [#13] Changed modified/created/restored values to lexicon references.
 
 VersionX 1.0 Alpha2 (Released 11/01/2011)
+=========================================
 - [#9] Added readme & license
 - [#8] General improvement lexicon (smooth-graphics)
 - Fixed fatal IE issue (breaking on "class" and "new")
