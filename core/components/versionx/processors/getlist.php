@@ -102,7 +102,7 @@
 		$tplObj = $modx->getObject('modTemplate',$tpl);
 		if (!$tplObj) { 
 			$modx->lexicon->load('template');
-			$resArray['template'] = $modx->lexicon('template_err_nf'); 
+			$resArray['template'] = $modx->lexicon('template_err_nf').' ('.$tpl.')'; 
 		}
 		else { $resArray['template'] = $tplObj->get('templatename').' ('.$tpl.')'; }
 		
