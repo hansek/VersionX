@@ -2,6 +2,7 @@ CHANGELOG VERSIONX
 
 VersionX 1.0 Beta1 (to be released)
 ===================================
+- #2: Added pagination to resource overview
 - Added Russian translation (elastic)
 
 VersionX 1.0 Alpha3 (Released 14/1/2010)
