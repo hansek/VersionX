@@ -11,7 +11,7 @@ VersionX 1.0 Beta1 (to be released)
 - #2: Added pagination to resource overview
 - Added Russian translation (elastic)
 
-VersionX 1.0 Alpha3 (Released 14/1/2010)
+VersionX 1.0 Alpha3 (Released 14/1/2011)
 ========================================
 - [#13] Added a few more lexicon strings, improved some error handling, improved code readability
 - [#4/#6/#14] Updated grid list processor for usability (date formatting, boolean is now yes/no, editedby (and similar) now gives users full name, template shows template name..
@@ -31,3 +31,7 @@ VersionX 1.0 Alpha2 (Released 11/01/2011)
 - Fixed fatal IE issue (breaking on "class" and "new")
 - Fixed fatal issue when a new resource has been created.
 - [#3] Added german translation (smooth-graphics)
+
+VersionX 1.0 Alpha (Released 09/01/2011)
+========================================
+Initial release.
