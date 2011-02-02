@@ -44,21 +44,48 @@
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
-	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in compareResources.php'); // @LEXICON
-	  die ('Error fetching versionx package in compareResources.php'); // @LEXICON
+	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in compareResources.php'); 
+		die(json_encode(array(
+			'total' => 0,
+			'error' => 'Error fetching versionx package in xPDO')
+		));
 	}
 	
 	// Get the two objects for the new and old revision
 	$revNewObj = $modx->getObject('Versionx', $revNew);
-	if (!$revNewObj) { die ('Error fetching new revision'); } // @LEXICON
+	if (!$revNewObj) { 		
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'field' => 'ERROR',
+					'oldvalue' => 'Error retrieving new revision.'))); // @LEXICON
+		die(json_encode($err));
+	} 
 	$revOldObj = $modx->getObject('Versionx', $revOld);
-	if (!$revOldObj) { die ('Error fetching old revision'); } // @LEXICON
+	if (!$revOldObj) { 		
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'field' => 'ERROR',
+					'oldvalue' => 'Error retrieving old revision.'))); // @LEXICON
+		die(json_encode($err));
+	}
 	
 	// Check if the IDs match.. if they don't, comparing is quite useless.
 	$revNewArr = array(); $revOldArr = array();
 	$revNewArr['id'] = $revNewObj->get('id');
 	$revOldArr['id'] = $revOldObj->get('id');
-	if ($revNewArr['id'] !== $revOldArr['id']) { die ('Revision id mismatch'); } // @LEXICON
+	if ($revNewArr['id'] !== $revOldArr['id']) { 
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'field' => 'ERROR',
+					'oldvalue' => 'New revision id does not match passed old revision id.'))); // @LEXICON
+		die(json_encode($err));
+	}
 	
 	// If the script got down here, let's compare some fields. Array does not include content.
 	$fields = array('contentType', 'pagetitle', 'longtitle', 'description', 'alias', 'link_attributes', 'published', 'pub_date', 'unpub_date', 'parent', 'isfolder', 'introtext', 'richtext', 'template', 'menuindex', 'searchable', 'cacheable', 'deleted', 'deletedon', 'deletedby', 'publishedon', 'publishedby', 'menutitle', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'content_dispo', 'hidemenu', 'context_key', 'content_type');

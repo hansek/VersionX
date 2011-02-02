@@ -28,6 +28,19 @@
 	require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 	require_once MODX_CONNECTORS_PATH.'index.php';
 
+	// Let's see if split() is depreciated (php > 5.3) and return an error before flooding the error log.
+	if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'change' => 'ERROR',
+					'oldvalue' => 'Sorry, not compatible with php > 5.3.0 :(',
+					'newvalue' => 'You run '.PHP_VERSION))); // @LEXICON
+		die(json_encode($err));
+	}
+	
+	
 	// Find revisions from the $_POST data
 	$revNew = (is_numeric($_REQUEST['new'])) ? $_REQUEST['new'] : '';
 	$revOld = (is_numeric($_REQUEST['old'])) ? $_REQUEST['old'] : '';
@@ -36,7 +49,7 @@
 			'total' => 1,
 			'results' => array(
 				0 => array(
-					'field' => 'ERROR',
+					'change' => 'ERROR',
 					'oldvalue' => 'Error uncovering revision numbers.'))); // @LEXICON
 		die(json_encode($err));
 	}
@@ -46,20 +59,48 @@
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
 	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in compareResourcesContent.php'); // @LEXICON
-	  die ('Error fetching versionx package in compareResourcesContent.php'); // @LEXICON
+	  	die(json_encode(array(
+			'total' => 0,
+			'error' => 'Error fetching versionx package in xPDO')
+		));
 	}
 	
 	// Get the two objects for the new and old revision
 	$revNewObj = $modx->getObject('Versionx', $revNew);
-	if (!$revNewObj) { die ('Error fetching new revision'); } // @LEXICON
+	if (!$revNewObj) { 		
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'change' => 'ERROR',
+					'oldvalue' => 'Error retrieving new revision.'))); // @LEXICON
+		die(json_encode($err));
+	} 
 	$revOldObj = $modx->getObject('Versionx', $revOld);
-	if (!$revOldObj) { die ('Error fetching old revision'); } // @LEXICON
+	if (!$revOldObj) { 		
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'change' => 'ERROR',
+					'oldvalue' => 'Error retrieving old revision.'))); // @LEXICON
+		die(json_encode($err));
+	}
 	
 	// Check if the IDs match.. if they don't, comparing is quite useless.
 	$revNewArr = array(); $revOldArr = array();
 	$revNewArr['id'] = $revNewObj->get('id');
 	$revOldArr['id'] = $revOldObj->get('id');
-	if ($revNewArr['id'] !== $revOldArr['id']) { die ('Revision id mismatch'); } // @LEXICON
+	if ($revNewArr['id'] !== $revOldArr['id']) { 
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'change' => 'ERROR',
+					'oldvalue' => 'New revision id does not match passed old revision id.'))); // @LEXICON
+		die(json_encode($err));
+	}
+	
 	
 	// If the script got down here, let's compare the content.
 	$c1 = $revNewObj->get('contentField');

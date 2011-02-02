@@ -2,6 +2,8 @@ CHANGELOG VERSIONX
 
 VersionX 1.0 Beta1 (to be released)
 ===================================
+- Re #18: Add check for php >5.3.0 when comparing resource content (prevents E_DEPRECEATED error for split() in xpdorevisioncontrol)
+- #21: Encode errors returned by processors to json to prevent ajax loader getting stuck
 - Display template ID in view details when template could not be found
 - Replaced 0 with empty string when no parent exists in view details
 - #23: Show parent ID next to title in view details

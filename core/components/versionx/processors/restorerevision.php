@@ -62,7 +62,6 @@
 		$resource->set($field,$revObj->get($field));
 	}
 
-	// @@ 4/1/2011
 	$vX_findlastrev = $modx->newQuery('Versionx');
 	$vX_findlastrev->where(array(
 	  'id' => $revObj->get('id')));
@@ -70,7 +69,6 @@
 	$vX_lastrev = $modx->getObject('Versionx',$vX_findlastrev);
 	$newRev->set('fromRev',$vX_lastrev->get('revision'));
 	
-	// END
 	$newRev->set('mode','rev'.$rev);
 	$newRev->set('contentField',$revObj->get('contentField'));
 	$resource->setContent($revObj->get('contentField'));

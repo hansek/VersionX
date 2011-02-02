@@ -39,7 +39,11 @@
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
-	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in xPDO');
+		$modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in xPDO');
+		die(json_encode(array(
+			'total' => 0,
+			'error' => 'Error fetching versionx package in xPDO')
+		));
 	}
 
 	
