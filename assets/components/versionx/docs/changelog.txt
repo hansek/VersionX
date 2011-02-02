@@ -2,6 +2,8 @@ CHANGELOG VERSIONX
 
 VersionX 1.0 Beta1 (to be released)
 ===================================
+- Replaced 0 with empty string when no parent exists. 
+- #23: Show parent ID next to title in view details
 - #20: Translated resource field names, yes/no and some error messages in revision details window / getlist processor
 - #2: Added pagination to resource overview
 - Added Russian translation (elastic)

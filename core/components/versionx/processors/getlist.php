@@ -40,7 +40,6 @@
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
 	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in xPDO');
-	  die(json_encode(array
 	}
 
 	
@@ -111,8 +110,10 @@
 		$parent = $resArray['parent'];
 		if ($parent > 0) {
 			$parObj = $modx->getObject('modResource',$parent);
-			if ($parObj) { $resArray['parent'] = $parObj->get($modx->getOption('resource_tree_node_name')); }
-		} 
+			if ($parObj) { $resArray['parent'] = $parObj->get($modx->getOption('resource_tree_node_name')).' ('.$parent.')'; }
+		} else {
+			$resArray['parent'] = '';
+		}
 			
 		
 		// "id" is rendered as unique in extjs, so change the id field to docid
