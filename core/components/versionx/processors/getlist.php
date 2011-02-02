@@ -38,10 +38,15 @@
 
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
-			if (!$fetchModel) {
+	if (!$fetchModel) {
 	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in xPDO');
+	  die(json_encode(array
 	}
 
+	
+	$modx->getService('lexicon','modLexicon');
+	$modx->lexicon->load('versionx:default', 'default');
+	
 	// Build query
 	$c = $modx->newQuery('Versionx');
 	$count = $modx->getCount('Versionx',$c);
@@ -63,6 +68,8 @@
 		// Start processing fields in the $rev object.
 		// First process the fields with user IDs.
 		$userfields = array('createdby', 'editedby', 'publishedby', 'deletedby');
+		// Just in case we need it include the user lexicon topic:
+		$modx->lexicon->load('user');
 		foreach ($userfields as $x => $uf) {
 			if ($rev->get($uf) > 0) {
 				$uid = $rev->get($uf); 
@@ -72,8 +79,8 @@
 				else {
 					$u = $modx->getObject('modUser',$uid);
 					if (!$u) { // No user found with that ID
-						$resArray[$uf] = 'User ID '.$uid.' not found';
-						$userID['u'.$uid] = 'User ID '.$uid.' not found';
+						$resArray[$uf] = $modx->lexicon('user_err_nf').' ('.$uid.')';
+						$userID['u'.$uid] = $modx->lexicon('user_err_nf').' ('.$uid.')';
 					} else {
 						$up = $u->getOne('Profile');
 						$ufn = $up->get('fullname').' ('.$uid.')';
@@ -94,7 +101,10 @@
 		// Display the template name
 		$tpl = $resArray['template'];
 		$tplObj = $modx->getObject('modTemplate',$tpl);
-		if (!$tplObj) { $resArray['template'] = 'Not found.'; }
+		if (!$tplObj) { 
+			$modx->lexicon->load('template');
+			$resArray['template'] = $modx->lexicon('template_err_nf'); 
+		}
 		else { $resArray['template'] = $tplObj->get('templatename').' ('.$tpl.')'; }
 		
 		// Display the parent's resource_tree_node_name
@@ -103,15 +113,17 @@
 			$parObj = $modx->getObject('modResource',$parent);
 			if ($parObj) { $resArray['parent'] = $parObj->get($modx->getOption('resource_tree_node_name')); }
 		} 
+			
 		
 		// "id" is rendered as unique in extjs, so change the id field to docid
 		$resArray['docid'] = $resArray['id']; 	
 		unset ($resArray['id']); 
 		
-		// Render boolean values (0,1) as yes or no
+		// Render boolean values (0,1) as yes or no (lexiconified)
 		$boolFields = array('published', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'content_dispo', 'hidemenu');
+		$yes = $modx->lexicon('yes'); $no = $modx->lexicon('yes');
 		foreach ($boolFields as $fld) {
-			$resArray[$fld] = ($resArray[$fld] > 0) ? 'Yes' : 'No'; // Lexicon-ify
+			$resArray[$fld] = ($resArray[$fld] > 0) ? $yes : $no; 
 		}
 		
 		// Format the time, using $dateFormat which is set to the manager date + time format

@@ -2,6 +2,7 @@ CHANGELOG VERSIONX
 
 VersionX 1.0 Beta1 (to be released)
 ===================================
+- #20: Translated resource field names, yes/no and some error messages in revision details window / getlist processor
 - #2: Added pagination to resource overview
 - Added Russian translation (elastic)
 
