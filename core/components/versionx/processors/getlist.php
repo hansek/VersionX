@@ -29,8 +29,9 @@
 	/* setup default properties */
 	$isLimit = !empty($scriptProperties['limit']);
 	$isCombo = !empty($scriptProperties['combo']);
-	$start = $modx->getOption('start',$scriptProperties,0);
-	$limit = $modx->getOption('limit',$scriptProperties,20);
+	
+	$start = $modx->getOption('start',$_REQUEST,0);
+	$limit = $modx->getOption('limit',$_REQUEST,20);
 	$sort = $modx->getOption('sort',$scriptProperties,'revision');
 	$dir = $modx->getOption('dir',$scriptProperties,'DESC');
 	$dateFormat = $modx->getOption('dateformat',$scriptProperties,$modx->getOption('manager_date_format').' '.$modx->getOption('manager_time_format'));
@@ -45,6 +46,7 @@
 	$c = $modx->newQuery('Versionx');
 	$count = $modx->getCount('Versionx',$c);
 	$c->sortby($sort,$dir);
+	$c->limit($limit,$start);
 
 	// Fetch items
 	$revisions = $modx->getCollection('Versionx', $c);
