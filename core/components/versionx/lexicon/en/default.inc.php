@@ -22,35 +22,35 @@
  * @package versionx
  * @subpackage lexicon-en
  * @author Mark Hamstra 
- * @date 2011-01-04
+ * @date 2011-02-03
  * 
 */
-
+ 
 $vxp = 'versionx.'; // I'm lazy, I know.
-
+ 
 // Global 
 $_lang[$vxp.'versionx'] = 'VersionX';
-
+ 
 // Manager: Component menu
 $_lang[$vxp.'menuDesc'] = 'A simple versioning component.';
-
+ 
 // CMP: Overview
 $_lang[$vxp.'overviewTitle'] = 'Overview';
 $_lang[$vxp.'overviewDescription'] = 'VersionX keeps record of all your changes in Resources, Chunks and Snippets and offers a one-click option to restore an old revision. Visit the relative tabs for detailed information..';
 $_lang[$vxp.'devTitle'] = 'Development';
 $_lang[$vxp.'devDescription'] = 'VersionX has been developed by <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> as a simple versioning addon for <a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a>. 
-	Please report any bugs or unexpected behaviour at <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github</a>.';
-	
+    Please report any bugs or unexpected behaviour at <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github</a>.';
+     
 // CMP: Resources
 $_lang[$vxp.'resourcesTitle'] = 'Resources';
 $_lang[$vxp.'resourcesDescription'] = 'VersionX takes note of your most valuable assets - your content.';
-
+ 
 //// Resource detail window
 $_lang[$vxp.'detailwindow.title'] = 'Resource Revision ';
 $_lang[$vxp.'detailwindow.basictab'] = 'Basic Fields';
 $_lang[$vxp.'detailwindow.settingstab'] = 'Settings';
-$_lang[$vxp.'detailwindow.contenttab'] = 'Content'; // New 14/1/2011
-
+$_lang[$vxp.'detailwindow.contenttab'] = 'Content';
+ 
 //// Resource compare window
 $_lang[$vxp.'comparewindow.fieldstab'] = 'Fields &amp; Settings'; 
 $_lang[$vxp.'comparewindow.contenttab'] = 'Content';
@@ -60,16 +60,15 @@ $_lang[$vxp.'comparewindow.fields.new'] = 'New';
 $_lang[$vxp.'comparewindow.fields.change'] = 'Change';
 $_lang[$vxp.'added'] = 'added';
 $_lang[$vxp.'removed'] = 'removed';
-
-
+ 
 // CMP: Chunks
 $_lang[$vxp.'chunksTitle'] = 'Chunks';
 $_lang[$vxp.'chunksDescription']  = 'Objects which can be used globally are better watched after. VersionX does that, and can show you the differences between different revisions.';
-
+ 
 // CMP: Snippets
 $_lang[$vxp.'snippetsTitle'] = 'Snippets';
 $_lang[$vxp.'snippetsDescription'] = 'Ever had a working snippet that changed after making a change? Revert easily with VersionX.';
-
+ 
 // CMP: Grid headings
 $_lang[$vxp.'grid.revNum'] = '#';
 $_lang[$vxp.'grid.docID'] = 'Res. ID';
@@ -81,7 +80,7 @@ $_lang[$vxp.'grid.fromRev'] = 'Prior';
 $_lang[$vxp.'grid.class'] = 'Class';
 $_lang[$vxp.'grid.time'] = 'Time';
 $_lang[$vxp.'grid.editor'] = 'Editor';
-
+ 
 // CMP: Grid context menu
 $_lang[$vxp.'grid.details'] = 'View details';
 $_lang[$vxp.'grid.compare'] = 'Compare';
@@ -89,8 +88,8 @@ $_lang[$vxp.'grid.restore'] = 'Restore';
 $_lang[$vxp.'grid.restoreTitle'] = 'Restore revision';
 $_lang[$vxp.'grid.restoreMsg'] = 'Are you sure you want to revert the resource to the selected revision?';
 $_lang[$vxp.'grid.restore.done'] = 'The specified revision has been restored.';
-
-// CMP: Error messages (New 14/1/2011, 3/2/2011)
+ 
+// CMP: Error messages
 $_lang[$vxp.'error.idnotfound'] = 'Unable to locate revision ID. Your revisions table may be corrupt.';
 $_lang[$vxp.'error.requestfailed'] = 'Loading the required data failed. Please check your connection.';
 $_lang[$vxp.'error.packagenotfound'] = 'Fatal error: unable to register VersionX package.';
@@ -98,8 +97,6 @@ $_lang[$vxp.'error.revsnotfound'] = 'Fatal error: no revision numbers specified.
 $_lang[$vxp.'error.revobjectnotfound'] = 'Fatal error: unable to retrieve revision object.';
 $_lang[$vxp.'error.revsdontmatch'] = 'Fatal error: the two specified revisions do not belong to the same resource.';
 
-
 // (Hopefully) temporary error for xpdorevisioncontrol error for php > 5.3.0
 $_lang[$vxp.'error.splitdepreciated'] = 'Sorry, not compatible with php over 5.3.0 :(';
-
 ?>
