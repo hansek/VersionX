@@ -23,7 +23,7 @@
  * @package versionx
  * @subpackage lexicon-de
  * @author Anselm Hannemann
- * @date 2011-01-11
+ * @date 2011-02-03
  * 
 */
 
@@ -49,15 +49,17 @@ $_lang[$vxp.'resourcesDescription'] = 'VersionX erfasst sämtliche Änderungen a
 $_lang[$vxp.'detailwindow.title'] = 'Ressourcen Änderung';
 $_lang[$vxp.'detailwindow.basictab'] = 'Dokument Felder';
 $_lang[$vxp.'detailwindow.settingstab'] = 'Seiteneinstellungen';
+$_lang[$vxp.'detailwindow.contenttab'] = 'Inhalt';
 
 //// Resource compare window
-//$_lang[$vxp.'resources.comparewindow.title'] = ''; 
 $_lang[$vxp.'comparewindow.fieldstab'] = 'Felder &amp; Seiteneinstellungen'; 
 $_lang[$vxp.'comparewindow.contenttab'] = 'Inhalt';
 $_lang[$vxp.'comparewindow.fields.field'] = 'Feld';
 $_lang[$vxp.'comparewindow.fields.old'] = 'alt';
 $_lang[$vxp.'comparewindow.fields.new'] = 'neu';
 $_lang[$vxp.'comparewindow.fields.change'] = 'geändert';
+$_lang[$vxp.'added'] = 'hinzugefügt';
+$_lang[$vxp.'removed'] = 'entfernt';
 
 // CMP: Chunks
 $_lang[$vxp.'chunksTitle'] = 'Chunks';
@@ -87,8 +89,14 @@ $_lang[$vxp.'grid.restoreTitle'] = 'Version wiederherstellen';
 $_lang[$vxp.'grid.restoreMsg'] = 'Sind Sie sicher, dass Sie diese Ressource mit der gewählten (evtl. veralteten) Version ersetzen möchten?';
 $_lang[$vxp.'grid.restore.done'] = 'Die ausgewählte Version wurde wiederhergestellt.';
 
-// CMP: Error messages (New 14/1/2011)
+// CMP: Error messages
 $_lang[$vxp.'error.idnotfound'] = 'Konnte Versions-ID nicht finden. Die Versionstabelle könnte beschädigt sein.';
 $_lang[$vxp.'error.requestfailed'] = 'Laden der benötigten Daten fehlgeschlagen! Bitte prüfen Sie Ihre Verbindung.';
-
+$_lang[$vxp.'error.packagenotfound'] = 'Schwerer Fehler: es ist unmöglich das VersionX Package zu registrieren.';
+$_lang[$vxp.'error.revsnotfound'] = 'Schwerer Fehler: es wurden keine Versionsnummern angegeben.';
+$_lang[$vxp.'error.revobjectnotfound'] = 'Schwerer Fehler: es onnten keine Versionsobjekte gefunden werden.';
+$_lang[$vxp.'error.revsdontmatch'] = 'Schwerer Fehler: die zwei angegebenen Versionen gehören nicht zu einer gemeinsamen Ressource.';
+ 
+// (Hopefully) temporary error for xpdorevisioncontrol error for php > 5.3.0
+$_lang[$vxp.'error.splitdepreciated'] = 'Entschuldigung, dieses Package ist nicht kompatibel mit PHP 5.3.0+ (split-Funktion) Bitte warten Sie auf ein Update!';
 ?>
