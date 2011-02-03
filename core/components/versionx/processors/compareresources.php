@@ -27,6 +27,9 @@
 	require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 	require_once MODX_CONNECTORS_PATH.'index.php';
 
+	$modx->getService('lexicon','modLexicon');
+	$modx->lexicon->load('versionx:default', 'default');
+	
 	// Find revisions from the $_POST data
 	$revNew = (is_numeric($_REQUEST['new'])) ? $_REQUEST['new'] : '';
 	$revOld = (is_numeric($_REQUEST['old'])) ? $_REQUEST['old'] : '';
@@ -36,7 +39,7 @@
 			'results' => array(
 				0 => array(
 					'field' => 'ERROR',
-					'oldvalue' => 'Error uncovering revision numbers.'))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.revsnotfound')))); 
 		die(json_encode($err));
 	}
 	
@@ -44,10 +47,10 @@
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
-	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in compareResources.php'); 
+	  $modx->log(modX::LOG_LEVEL_ERROR, $modx->lexicon('versionx.error.packagenotfound')); 
 		die(json_encode(array(
 			'total' => 0,
-			'error' => 'Error fetching versionx package in xPDO')
+			'error' => $modx->lexicon('versionx.error.packagenotfound'))
 		));
 	}
 	
@@ -59,7 +62,7 @@
 			'results' => array(
 				0 => array(
 					'field' => 'ERROR',
-					'oldvalue' => 'Error retrieving new revision.'))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.revobjectnotfound')))); 
 		die(json_encode($err));
 	} 
 	$revOldObj = $modx->getObject('Versionx', $revOld);
@@ -69,7 +72,7 @@
 			'results' => array(
 				0 => array(
 					'field' => 'ERROR',
-					'oldvalue' => 'Error retrieving old revision.'))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.revobjectnotfound')))); 
 		die(json_encode($err));
 	}
 	
@@ -83,7 +86,7 @@
 			'results' => array(
 				0 => array(
 					'field' => 'ERROR',
-					'oldvalue' => 'New revision id does not match passed old revision id.'))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.revsdontmatch')))); 
 		die(json_encode($err));
 	}
 	

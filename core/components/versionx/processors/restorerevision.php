@@ -22,32 +22,30 @@
  * @package versionx
  * @subpackage processors
  */
-	$rev = $_POST['revision'];
+	$rev = (int) $_POST['revision'];
 	
 	// Include the MODx object 
 	require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/config.core.php';
 	require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 	require_once MODX_CONNECTORS_PATH.'index.php';
-
-	if (!is_numeric($rev)) {
-		die( json_encode(array(
-			'error' => 1,
-			'message' => 'Revision is not numeric')));
-	}
+	
+	$modx->getService('lexicon','modLexicon');
+	$modx->lexicon->load('versionx:default', 'default');
+	
 	// Load up VersionX
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
-		$modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in restoreRevision.php');
+		$modx->log(modX::LOG_LEVEL_ERROR, $modx->lexicon('versionx.error.packagenotfound'));
 		die(json_encode(array(
 			'error' => 1,
-			'message' => 'Unable to fetch the VersionX model.')));
+			'message' => $modx->lexicon('versionx.error.packagenotfound'))));
 	}
 	// Fetch the revision data
 	$revObj = $modx->getObject('Versionx',$rev);
 	if ($revObj == '') { die(json_encode(array(
 			'error' => 1,
-			'message' => 'Could not load revision data.')));
+			'message' => $modx->lexicon('versionx.error.revobjectnotfound')));
 	}
 
 	$vX_allfields = array('id', 'type', 'contentType', 'pagetitle', 'longtitle', 'description', 'alias', 'link_attributes', 'published', 'pub_date', 'unpub_date',

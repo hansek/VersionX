@@ -28,6 +28,8 @@
 	require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 	require_once MODX_CONNECTORS_PATH.'index.php';
 
+	$modx->getService('lexicon','modLexicon');
+	$modx->lexicon->load('versionx:default', 'default');
 	// Let's see if split() is depreciated (php > 5.3) and return an error before flooding the error log.
 	if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
 		$err = array(
@@ -35,11 +37,11 @@
 			'results' => array(
 				0 => array(
 					'change' => 'ERROR',
-					'oldvalue' => 'Sorry, not compatible with php > 5.3.0 :(',
-					'newvalue' => 'You run '.PHP_VERSION))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.splitdepreciated')))); 
 		die(json_encode($err));
 	}
 	
+
 	
 	// Find revisions from the $_POST data
 	$revNew = (is_numeric($_REQUEST['new'])) ? $_REQUEST['new'] : '';
@@ -50,7 +52,7 @@
 			'results' => array(
 				0 => array(
 					'change' => 'ERROR',
-					'oldvalue' => 'Error uncovering revision numbers.'))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.revsnotfound')))); 
 		die(json_encode($err));
 	}
 	
@@ -58,10 +60,10 @@
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
-	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in compareResourcesContent.php'); // @LEXICON
-	  	die(json_encode(array(
+	  $modx->log(modX::LOG_LEVEL_ERROR, $modx->lexicon('versionx.error.packagenotfound')); 
+		die(json_encode(array(
 			'total' => 0,
-			'error' => 'Error fetching versionx package in xPDO')
+			'error' => $modx->lexicon('versionx.error.packagenotfound'))
 		));
 	}
 	
@@ -73,7 +75,7 @@
 			'results' => array(
 				0 => array(
 					'change' => 'ERROR',
-					'oldvalue' => 'Error retrieving new revision.'))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.revobjectnotfound')))); 
 		die(json_encode($err));
 	} 
 	$revOldObj = $modx->getObject('Versionx', $revOld);
@@ -83,7 +85,7 @@
 			'results' => array(
 				0 => array(
 					'change' => 'ERROR',
-					'oldvalue' => 'Error retrieving old revision.'))); // @LEXICON
+					'oldvalue' =>  $modx->lexicon('versionx.error.revobjectnotfound')))); 
 		die(json_encode($err));
 	}
 	
@@ -97,7 +99,7 @@
 			'results' => array(
 				0 => array(
 					'change' => 'ERROR',
-					'oldvalue' => 'New revision id does not match passed old revision id.'))); // @LEXICON
+					'oldvalue' => $modx->lexicon('versionx.error.revsdontmatch')))); 
 		die(json_encode($err));
 	}
 	
@@ -118,6 +120,10 @@
 	$rl = explode("\n",trim($result[0]));
 	$rr = explode("\n",trim($result[1]));
 
+	$lex = array(
+		'modified' => $modx->lexicon('versionx.grid.mode.upd'),
+		'added' => $modx->lexicon('versionx.added'),
+		'removed' => $modx->lexicon('versionx.removed'));
 	$count1 = count($rl) -1;
 	$count2 = count($rr);
 	$count = ($count1 > $count2) ? $count1 : $count2;
@@ -129,17 +135,17 @@
 		$change = '';
 		switch (substr($new,0,1).substr($old,0,1)) {
 			case '<>':
-				$change = 'modified'; 
+				$change = $lex['modified']; 
 				$newC = substr($new,2);
 				$oldC = substr($old,2);
 				break;
 			case '<':
-				$change = 'added'; 
+				$change = $lex['added']; 
 				$newC = substr($new,2);
 				$oldC = substr($old,2);
 				break;
 			case '>':
-				$change = 'removed'; 
+				$change = $lex['removed']; 
 				//$newC = substr($new,2);
 				$oldC = substr($new,2);
 				break;

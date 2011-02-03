@@ -52,13 +52,15 @@ $_lang[$vxp.'detailwindow.settingstab'] = 'Settings';
 $_lang[$vxp.'detailwindow.contenttab'] = 'Content'; // New 14/1/2011
 
 //// Resource compare window
-//$_lang[$vxp.'resources.comparewindow.title'] = ''; 
 $_lang[$vxp.'comparewindow.fieldstab'] = 'Fields &amp; Settings'; 
 $_lang[$vxp.'comparewindow.contenttab'] = 'Content';
 $_lang[$vxp.'comparewindow.fields.field'] = 'Field';
 $_lang[$vxp.'comparewindow.fields.old'] = 'Old';
 $_lang[$vxp.'comparewindow.fields.new'] = 'New';
 $_lang[$vxp.'comparewindow.fields.change'] = 'Change';
+$_lang[$vxp.'added'] = 'added';
+$_lang[$vxp.'removed'] = 'removed';
+
 
 // CMP: Chunks
 $_lang[$vxp.'chunksTitle'] = 'Chunks';
@@ -88,7 +90,16 @@ $_lang[$vxp.'grid.restoreTitle'] = 'Restore revision';
 $_lang[$vxp.'grid.restoreMsg'] = 'Are you sure you want to revert the resource to the selected revision?';
 $_lang[$vxp.'grid.restore.done'] = 'The specified revision has been restored.';
 
-// CMP: Error messages (New 14/1/2011)
+// CMP: Error messages (New 14/1/2011, 3/2/2011)
 $_lang[$vxp.'error.idnotfound'] = 'Unable to locate revision ID. Your revisions table may be corrupt.';
 $_lang[$vxp.'error.requestfailed'] = 'Loading the required data failed. Please check your connection.';
+$_lang[$vxp.'error.packagenotfound'] = 'Fatal error: unable to register VersionX package.';
+$_lang[$vxp.'error.revsnotfound'] = 'Fatal error: no revision numbers specified.';
+$_lang[$vxp.'error.revobjectnotfound'] = 'Fatal error: unable to retrieve revision object.';
+$_lang[$vxp.'error.revsdontmatch'] = 'Fatal error: the two specified revisions do not belong to the same resource.';
+
+
+// (Hopefully) temporary error for xpdorevisioncontrol error for php > 5.3.0
+$_lang[$vxp.'error.splitdepreciated'] = 'Sorry, not compatible with php over 5.3.0 :(';
+
 ?>

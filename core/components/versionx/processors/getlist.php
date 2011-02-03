@@ -36,19 +36,18 @@
 	$dir = $modx->getOption('dir',$scriptProperties,'DESC');
 	$dateFormat = $modx->getOption('dateformat',$scriptProperties,$modx->getOption('manager_date_format').' '.$modx->getOption('manager_time_format'));
 
+	$modx->getService('lexicon','modLexicon');
+	$modx->lexicon->load('versionx:default', 'default');
+	
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
-		$modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in xPDO');
+		$modx->log(modX::LOG_LEVEL_ERROR, $modx->lexicon('versionx.error.packagenotfound'));
 		die(json_encode(array(
 			'total' => 0,
-			'error' => 'Error fetching versionx package in xPDO')
+			'error' => $modx->lexicon('versionx.error.packagenotfound'))
 		));
 	}
-
-	
-	$modx->getService('lexicon','modLexicon');
-	$modx->lexicon->load('versionx:default', 'default');
 	
 	// Build query
 	$c = $modx->newQuery('Versionx');
