@@ -29,6 +29,7 @@
   $eventName = $modx->event->name;
   switch($eventName) {
     case 'OnDocFormSave':
+	  define ('versionx', true);
       include_once($modx->getOption('core_path').'components/versionx/plugin.inc.php');
       break;
   }
