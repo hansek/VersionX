@@ -21,11 +21,6 @@
  *
  * @package versionx
  */
-/*
- * This file's content should be added to the VersionX plugin within MODx
- * System events:
- * - OnDocFormSave
- */
   $eventName = $modx->event->name;
   switch($eventName) {
     case 'OnDocFormSave':

@@ -21,11 +21,7 @@
  *
  * @package versionx
  */
-/*
- * Installation instructions:
- * - Upload the core and assets folder to the related folder on your server
- * - 
- */
+
    if (!defined('versionx')) {
 		die ('Unauthorized access.');
 	}
