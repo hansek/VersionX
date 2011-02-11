@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
  * VersionX 1.0
  *
  * Copyright 2010-2011 by Mark Hamstra (contact via www.markhamstra.nl)
