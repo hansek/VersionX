@@ -35,10 +35,10 @@
 	
 	// Declare the package to use xPDO objects in the CMP.
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
-   $fetchModel = $modx->addPackage('versionx', $path, 'extra_');
+	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
       $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in xPDO');
-   } else {
+	} else {
 		// If package found.. output some empty divs for modExt
 		$o = '<div id="modx-panel-workspace-div"></div>
 			<div id="versionx-panel-home-div"></div>
