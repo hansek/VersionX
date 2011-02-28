@@ -107,7 +107,7 @@
 	}
 	
 	$unchanged = implode(', ',$unchanged);
-	$resultset = (count($changed) > 0) ? $changed : array('field' => '','oldvalue' => 'No changes found.');
+	$resultset = (count($changed) > 0) ? $changed : array(array('field' => '','oldvalue' => $modx->lexicon('versionx.error.nochangesfound')));
 	$result = array(
 		'total' => count($changed),
 		'results' => $resultset,

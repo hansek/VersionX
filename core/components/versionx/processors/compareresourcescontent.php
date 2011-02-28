@@ -166,9 +166,10 @@
 		}
 	}
 	
+	$resultset = (count($changed) > 0) ? $changed : array(array('field' => '','oldvalue' => $modx->lexicon('versionx.error.nochangesfound')));
 	$result = array (
 		'total' => count($changed),
-		'results' => $changed,
+		'results' => $resultset,
 		'xpdoresult' => $rl[0]);
 		
 	echo json_encode($result);

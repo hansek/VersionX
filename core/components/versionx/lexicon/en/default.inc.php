@@ -97,7 +97,7 @@ $_lang[$vxp.'error.packagenotfound'] = 'Fatal error: unable to register VersionX
 $_lang[$vxp.'error.revsnotfound'] = 'Fatal error: no revision numbers specified.';
 $_lang[$vxp.'error.revobjectnotfound'] = 'Fatal error: unable to retrieve revision object.';
 $_lang[$vxp.'error.revsdontmatch'] = 'Fatal error: the two specified revisions do not belong to the same resource.';
-
+$_lang[$vxp.'error.nochangesfound'] = 'No changes found.';
 
 // (Hopefully) temporary error for xpdorevisioncontrol error for php > 5.3.0
 $_lang[$vxp.'error.splitdepreciated'] = 'Sorry, not compatible with php over 5.3.0 :(';
