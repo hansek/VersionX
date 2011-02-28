@@ -134,6 +134,11 @@
 		
 		// Format the time, using $dateFormat which is set to the manager date + time format
 		$resArray['time'] = date($dateFormat,$rev->get('time')); 
+		$timeFields = array('createdon','publishedon','editedon','deletedon','pub_date','unpub_date');
+		foreach ($timeFields as $tf) {
+			$resArray[$tf] = ($resArray[$tf] > 0) ? date($dateFormat,$resArray[$tf]) : '';
+		}
+
 		
 		// If fromRev = 0, set it to '' (empty string)
 		$resArray['fromRev'] = ($resArray['fromRev'] > 0) ? $resArray['fromRev'] : '';  
