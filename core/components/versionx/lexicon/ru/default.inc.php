@@ -4,7 +4,7 @@ $_lang['versionx.menuDesc'] = 'Простой компонент для упра
 $_lang['versionx.overviewTitle'] = 'Обзор';
 $_lang['versionx.overviewDescription'] = 'VersionX ведет учет всех изменений в ресурсах, чанках и сниппетах. Вы можете в один клик восстанавливать предыдущие версии ресурсов, чанков, сниппетов. Смотрите соответствующие вкладки для подробной информации.';
 $_lang['versionx.devTitle'] = 'Разработка';
-$_lang['versionx.devDescription'] = 'VersionX был разработан <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> как простой компонент управления версиями для <a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a>.  Об ошибках сообщайте через проект на <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github</a>.';
+$_lang['versionx.devDescription'] = 'VersionX был разработан <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> как простой компонент управления версиями для <a href="http://www.modx.com" title="MODx: Content Management Framework">MODx CMF</a>.  Об ошибках сообщайте через проект на <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github</a>.';
 $_lang['versionx.resourcesTitle'] = 'Ресурсы';
 $_lang['versionx.resourcesDescription'] = 'VersionX заботится о самом ценном активе на сайте - его контенте.';
 $_lang['versionx.detailwindow.title'] = 'Версия ресурса';

@@ -39,7 +39,7 @@ $_lang[$vxp.'menuDesc'] = 'Komponente für Inhalt-Versionierung';
 $_lang[$vxp.'overviewTitle'] = 'Übersicht';
 $_lang[$vxp.'overviewDescription'] = 'VersionX überwacht sämtliche Änderungen in Ressourcen, Chunks und Snippets. Es bietet die Möglichkeit ältere Versionen per One-Click wiederherzustellen und Versionen zu vergleichen.<br>Für detaillierte Informationen wechseln Sie in den Reiter der gewünschten Ressourcengruppe.';
 $_lang[$vxp.'devTitle'] = 'Entwicklung';
-$_lang[$vxp.'devDescription'] = 'VersionX wurde von <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> als einfaches Versionierungs-Addon für <a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a> entwickelt.<br>Bitte melden Sie sämtliche Bugs, unerwartetes Verhalten oder Feature-Requests im <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github Repository</a>.';
+$_lang[$vxp.'devDescription'] = 'VersionX wurde von <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> als einfaches Versionierungs-Addon für <a href="http://www.modx.com" title="MODx: Content Management Framework">MODx CMF</a> entwickelt.<br>Bitte melden Sie sämtliche Bugs, unerwartetes Verhalten oder Feature-Requests im <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github Repository</a>.';
 	
 // CMP: Resources
 $_lang[$vxp.'resourcesTitle'] = 'Ressourcen';

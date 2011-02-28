@@ -2,6 +2,7 @@ CHANGELOG VERSIONX
 
 VersionX 1.0 Alpha4 (to be released)
 ===================================
+- #37: Update link to modx.com instead of modxcms.com
 - #21: Lexicon-ify error messages of processor output. (New lexicon strings added to english file)
 - Re #18: Add check for php >5.3.0 when comparing resource content (prevents E_DEPRECEATED error for split() in xpdorevisioncontrol)
 - #21: Encode errors returned by processors to json to prevent ajax loader getting stuck
