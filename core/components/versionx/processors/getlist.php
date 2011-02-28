@@ -124,11 +124,13 @@
 		unset ($resArray['id']); 
 		
 		// Render boolean values (0,1) as yes or no (lexiconified)
-		$boolFields = array('published', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'content_dispo', 'hidemenu');
+		$boolFields = array('published', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'hidemenu');
 		$yes = $modx->lexicon('yes'); $no = $modx->lexicon('yes');
 		foreach ($boolFields as $fld) {
 			$resArray[$fld] = ($resArray[$fld] > 0) ? $yes : $no; 
 		}
+		// Display proper content disposition
+		$resArray['content_dispo'] = ($resArray['content_dispo'] == 0) ? 'Inline' : 'Attachment';
 		
 		// Format the time, using $dateFormat which is set to the manager date + time format
 		$resArray['time'] = date($dateFormat,$rev->get('time')); 

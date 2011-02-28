@@ -107,9 +107,10 @@
 	}
 	
 	$unchanged = implode(', ',$unchanged);
+	$resultset = (count($changed) > 0) ? $changed : array('field' => '','oldvalue' => 'No changes found.');
 	$result = array(
 		'total' => count($changed),
-		'results' => $changed,
+		'results' => $resultset,
 		'unchanged' => $unchanged);
 		
 	echo json_encode($result);
