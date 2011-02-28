@@ -125,7 +125,7 @@
 		
 		// Render boolean values (0,1) as yes or no (lexiconified)
 		$boolFields = array('published', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'donthit', 'haskeywords', 'hasmetatags', 'privateweb', 'privatemgr', 'hidemenu');
-		$yes = $modx->lexicon('yes'); $no = $modx->lexicon('yes');
+		$yes = $modx->lexicon('yes'); $no = $modx->lexicon('no');
 		foreach ($boolFields as $fld) {
 			$resArray[$fld] = ($resArray[$fld] > 0) ? $yes : $no; 
 		}

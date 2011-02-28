@@ -2,7 +2,7 @@ CHANGELOG VERSIONX
 
 VersionX 1.0 Alpha4 (to be released)
 ===================================
-- #34: Fix view details display for content_disposition
+- #34: Fix lexicon reference for "no" in getlist. Improve content_disposition
 - Added copyright notice in Russian translation.
 - #37: Update link to modx.com instead of modxcms.com
 - #21: Lexicon-ify error messages of processor output. (New lexicon strings added to english file)
