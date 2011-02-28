@@ -14,7 +14,7 @@ set_time_limit(0);
 define('PKG_NAME','VersionX');
 define('PKG_NAME_LOWER','versionx');
 define('PKG_VERSION','1.0');
-define('PKG_RELEASE','beta1');
+define('PKG_RELEASE','alpha4');
 
 $root = dirname(dirname(__FILE__)).'/';
 $sources= array (
