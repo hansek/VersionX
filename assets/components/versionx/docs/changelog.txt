@@ -1,7 +1,8 @@
 ++++++++++++++++++++++++++++++++++++++++
 + VersionX 1.0 Alpha4 (to be released) +
 ++++++++++++++++++++++++++++++++++++++++
-#036	Add Dutch translation to the package. 
+		Updated German translation (smooth-graphics)
+#036	Add Dutch (Mark-H) and Swedish (frippz) translation to the package. 
 #030	Improve error display when no changes were made (New lexicon string added to English file)
 #019	Fix plugin code to save full timestamp as UNIX timestamp, and format in getlist process.
 #034	Fix lexicon reference for "no" in getlist. Improve content_disposition display.
