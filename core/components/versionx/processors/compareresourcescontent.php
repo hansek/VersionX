@@ -1,4 +1,5 @@
 <?php
+
 /*
  * VersionX
  *
@@ -30,18 +31,6 @@
 
 	$modx->getService('lexicon','modLexicon');
 	$modx->lexicon->load('versionx:default', 'default');
-	// Let's see if split() is depreciated (php > 5.3) and return an error before flooding the error log.
-	if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-		$err = array(
-			'total' => 1,
-			'results' => array(
-				0 => array(
-					'change' => 'ERROR',
-					'oldvalue' => $modx->lexicon('versionx.error.splitdepreciated')))); 
-		die(json_encode($err));
-	}
-	
-
 	
 	// Find revisions from the $_POST data
 	$revNew = (is_numeric($_REQUEST['new'])) ? $_REQUEST['new'] : '';
@@ -102,76 +91,34 @@
 					'oldvalue' => $modx->lexicon('versionx.error.revsdontmatch')))); 
 		die(json_encode($err));
 	}
-	
-	
+
 	// If the script got down here, let's compare the content.
 	$c1 = $revNewObj->get('contentField');
-	$rev2 = $modx->getObject('Versionx',$from);
 	$c2 = $revOldObj->get('contentField');
-	$changed = array();
+	
+	$c1n = explode("\n",htmlentities(trim($c1)));
+	$c2n = explode("\n",htmlentities(trim($c2))); 
 
-	// Rewrite, improve, comparing class?
-	include (MODX_CORE_PATH.'/xpdo/revision/xpdorevisioncontrol.class.php');
-	$compare = new xPDORevisionControl;
-	$result = $compare->diff($c1,$c2);
-
-	$result = explode('---',$result);
-
-	$rl = explode("\n",trim($result[0]));
-	$rr = explode("\n",trim($result[1]));
-
-	$lex = array(
-		'modified' => $modx->lexicon('versionx.grid.mode.upd'),
-		'added' => $modx->lexicon('versionx.added'),
-		'removed' => $modx->lexicon('versionx.removed'));
-	$count1 = count($rl) -1;
-	$count2 = count($rr);
-	$count = ($count1 > $count2) ? $count1 : $count2;
-	for ($i = 0;$i < $count;$i++) {
-		$skip = 0;
-		$new = $rl[$i+1]; // Due to "summary" of xpdorevisioncontrol
-		$old = $rr[$i];
-		$newC = ''; $oldC = ''; $change = '';
-		$change = '';
-		switch (substr($new,0,1).substr($old,0,1)) {
-			case '<>':
-				$change = $lex['modified']; 
-				$newC = substr($new,2);
-				$oldC = substr($old,2);
-				break;
-			case '<':
-				$change = $lex['added']; 
-				$newC = substr($new,2);
-				$oldC = substr($old,2);
-				break;
-			case '>':
-				$change = $lex['removed']; 
-				//$newC = substr($new,2);
-				$oldC = substr($new,2);
-				break;
-			case '\\':
-				$skip = 1;
-				break;
-			default:
-				$skip = 1;
-				break;
-		}
-		if ($skip == 0) {
-			$newC = nl2br(htmlentities($newC));
-			$oldC = nl2br(htmlentities($oldC));
-			$changed[] = array (
-				'oldvalue' => $oldC,
-				'newvalue' => $newC,
-				'change' => $change);
-		}
+	// Include the diff class by Paul Butler (© 2007)
+	include_once ('diff.class.php');
+	// Fetch the changes by calling the diff class
+	$changed = diff($c2n,$c1n);
+	// Instantiate a simple line counter
+	$chline = 0;
+	
+	foreach($changed as $k){
+	    $chline++;
+		if(is_array($k))
+			$ret[] = array('line' => $chline,'body' => (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'').
+				(!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":''));
+		// @TODO: Make the below a setting wether or not to display the non-changed lines.
+		//else $ret[] = array('line' => $chline,'body' => $k);
 	}
 	
-	$resultset = (count($changed) > 0) ? $changed : array(array('field' => '','oldvalue' => $modx->lexicon('versionx.error.nochangesfound')));
 	$result = array (
-		'total' => count($changed),
-		'results' => $resultset,
+		'total' => count($ret),
+		'results' => $ret,
 		'xpdoresult' => $rl[0]);
-		
 	echo json_encode($result);
 	
 ?>

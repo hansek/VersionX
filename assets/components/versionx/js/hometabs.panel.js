@@ -344,27 +344,24 @@ VersionX.grid.Resources.CompareContent = function(config) {
 				url: MODx.config.assets_url+'components/versionx/connector.php'
 				,id: 'resourcecomparecontentgrid'
 				,baseParams: { action: 'compareresourcescontent', 'old': fromRev, 'new': newRev }
-				,fields: ["oldvalue","newvalue","change"]
+				,fields: ["line","body"]
 				,paging: false
 				,autosave: false
 				,remoteSort: false
 				,primaryKey: 'oldvalue'
 				,columns: [{
-					header: _('versionx.comparewindow.fields.change')
-					,dataIndex: 'change'
+					header: _('versionx.grid.revNum')
+					,dataIndex: 'line'
 					,sortable: true
+					,width: 10
 				},{
-					header: _('versionx.comparewindow.fields.old')+' (R'+newRev+')'
-					,dataIndex: 'oldvalue'
+					header: _('versionx.comparewindow.contenttab')
+					,dataIndex: 'body'
 					,sortable: true
 					,forceFit: true
-					,width: 100
-				},{
-					header: _('versionx.comparewindow.fields.new')+' (R'+newRev+')'
-					,dataIndex: 'newvalue'
-					,sortable: true
-					,forceFit: true
-				  }]
+					,width: 90
+					,renderer: columnWrap
+				}]
 			});
 		}
 	}
@@ -372,3 +369,6 @@ VersionX.grid.Resources.CompareContent = function(config) {
 };
 Ext.extend(VersionX.grid.Resources.CompareContent,MODx.grid.Grid);
 Ext.reg('versionx-grid-resources-compare-content',VersionX.grid.Resources.CompareContent);
+function columnWrap(val){
+    return '<div style="white-space:normal !important;">'+ val +'</div>';
+}
