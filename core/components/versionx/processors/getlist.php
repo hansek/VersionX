@@ -60,7 +60,7 @@
 	$list = array();
 	
 	$userID = array(); // Will be used to "cache" the userIDs and their names.
-	
+	$contentTypes = array(); // To "cache" content types.
 	foreach ($revisions as $rev) {
 		// Set an empty array to hold the data for this revision.
 		$resArray = array();
@@ -131,6 +131,23 @@
 		}
 		// Display proper content disposition
 		$resArray['content_dispo'] = ($resArray['content_dispo'] == 0) ? $modx->lexicon('inline') : $modx->lexicon('attachment');
+		
+		// Display the content_type name
+		$ct = $resArray['content_type'];
+		if (!empty($contentTypes[$ct])) { // Check if the content type has been cached already
+			$resArray['content_type'] = $contentTypes[$ct];
+		} else {
+			$cto = $modx->getObject('modContentType',$ct);
+			if ($cto->get('name')) { 
+				$ctname = $cto->get('name');
+				$contentTypes[$ct] = $ctname;
+				$resArray['content_type'] = $ctname;
+			} else {
+				$modx->lexicon->load('content_type');
+				$resArray['content_type'] = $modx->lexicon('content_type_err_nf');
+				$contentTypes[$ct] = $modx->lexicon('content_type_err_nf');
+			}
+		}
 		
 		// Format the time, using $dateFormat which is set to the manager date + time format
 		$resArray['time'] = date($dateFormat,$rev->get('time')); 
