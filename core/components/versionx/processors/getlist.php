@@ -130,7 +130,7 @@
 			$resArray[$fld] = ($resArray[$fld] > 0) ? $yes : $no; 
 		}
 		// Display proper content disposition
-		$resArray['content_dispo'] = ($resArray['content_dispo'] == 0) ? 'Inline' : 'Attachment';
+		$resArray['content_dispo'] = ($resArray['content_dispo'] == 0) ? $modx->lexicon('inline') : $modx->lexicon('attachment');
 		
 		// Format the time, using $dateFormat which is set to the manager date + time format
 		$resArray['time'] = date($dateFormat,$rev->get('time')); 
