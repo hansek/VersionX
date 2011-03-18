@@ -1,6 +1,6 @@
-++++++++++++++++++++++++++++++++++++++++
-+ VersionX 1.0 Alpha4 (to be released) +
-++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++
++ VersionX 1.0 Alpha4 (Released 18/3/2011) +
+++++++++++++++++++++++++++++++++++++++++++++
 #018	Include new diff class (© Paul Butler) to serve PHP > 5.3 and provide better listing of changes.
 #039	Retrieve content_type name in getlist processor.
 #038	Use core lexicons for content_disposition values in getlist processor.
