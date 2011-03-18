@@ -1,4 +1,5 @@
 <?php
+
 /*
  * VersionX
  *
@@ -28,6 +29,9 @@
 	require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 	require_once MODX_CONNECTORS_PATH.'index.php';
 
+	$modx->getService('lexicon','modLexicon');
+	$modx->lexicon->load('versionx:default', 'default');
+	
 	// Find revisions from the $_POST data
 	$revNew = (is_numeric($_REQUEST['new'])) ? $_REQUEST['new'] : '';
 	$revOld = (is_numeric($_REQUEST['old'])) ? $_REQUEST['old'] : '';
@@ -36,8 +40,8 @@
 			'total' => 1,
 			'results' => array(
 				0 => array(
-					'field' => 'ERROR',
-					'oldvalue' => 'Error uncovering revision numbers.'))); // @LEXICON
+					'change' => 'ERROR',
+					'oldvalue' => $modx->lexicon('versionx.error.revsnotfound')))); 
 		die(json_encode($err));
 	}
 	
@@ -45,85 +49,76 @@
 	$path = MODX_CORE_PATH . 'components/versionx/model/';
 	$fetchModel = $modx->addPackage('versionx', $path, 'extra_');
 	if (!$fetchModel) {
-	  $modx->log(modX::LOG_LEVEL_ERROR, 'Error fetching versionX package in compareResourcesContent.php'); // @LEXICON
-	  die ('Error fetching versionx package in compareResourcesContent.php'); // @LEXICON
+	  $modx->log(modX::LOG_LEVEL_ERROR, $modx->lexicon('versionx.error.packagenotfound')); 
+		die(json_encode(array(
+			'total' => 0,
+			'error' => $modx->lexicon('versionx.error.packagenotfound'))
+		));
 	}
 	
 	// Get the two objects for the new and old revision
 	$revNewObj = $modx->getObject('Versionx', $revNew);
-	if (!$revNewObj) { die ('Error fetching new revision'); } // @LEXICON
+	if (!$revNewObj) { 		
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'change' => 'ERROR',
+					'oldvalue' => $modx->lexicon('versionx.error.revobjectnotfound')))); 
+		die(json_encode($err));
+	} 
 	$revOldObj = $modx->getObject('Versionx', $revOld);
-	if (!$revOldObj) { die ('Error fetching old revision'); } // @LEXICON
+	if (!$revOldObj) { 		
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'change' => 'ERROR',
+					'oldvalue' =>  $modx->lexicon('versionx.error.revobjectnotfound')))); 
+		die(json_encode($err));
+	}
 	
 	// Check if the IDs match.. if they don't, comparing is quite useless.
 	$revNewArr = array(); $revOldArr = array();
 	$revNewArr['id'] = $revNewObj->get('id');
 	$revOldArr['id'] = $revOldObj->get('id');
-	if ($revNewArr['id'] !== $revOldArr['id']) { die ('Revision id mismatch'); } // @LEXICON
-	
+	if ($revNewArr['id'] !== $revOldArr['id']) { 
+		$err = array(
+			'total' => 1,
+			'results' => array(
+				0 => array(
+					'change' => 'ERROR',
+					'oldvalue' => $modx->lexicon('versionx.error.revsdontmatch')))); 
+		die(json_encode($err));
+	}
+
 	// If the script got down here, let's compare the content.
 	$c1 = $revNewObj->get('contentField');
-	$rev2 = $modx->getObject('Versionx',$from);
 	$c2 = $revOldObj->get('contentField');
-	$changed = array();
+	
+	$c1n = explode("\n",htmlentities(trim($c1)));
+	$c2n = explode("\n",htmlentities(trim($c2))); 
 
-	// Rewrite, improve, comparing class?
-	include (MODX_CORE_PATH.'/xpdo/revision/xpdorevisioncontrol.class.php');
-	$compare = new xPDORevisionControl;
-	$result = $compare->diff($c1,$c2);
-
-	$result = explode('---',$result);
-
-	$rl = explode("\n",trim($result[0]));
-	$rr = explode("\n",trim($result[1]));
-
-	$count1 = count($rl) -1;
-	$count2 = count($rr);
-	$count = ($count1 > $count2) ? $count1 : $count2;
-	for ($i = 0;$i < $count;$i++) {
-		$skip = 0;
-		$new = $rl[$i+1]; // Due to "summary" of xpdorevisioncontrol
-		$old = $rr[$i];
-		$newC = ''; $oldC = ''; $change = '';
-		$change = '';
-		switch (substr($new,0,1).substr($old,0,1)) {
-			case '<>':
-				$change = 'modified'; 
-				$newC = substr($new,2);
-				$oldC = substr($old,2);
-				break;
-			case '<':
-				$change = 'added'; 
-				$newC = substr($new,2);
-				$oldC = substr($old,2);
-				break;
-			case '>':
-				$change = 'removed'; 
-				//$newC = substr($new,2);
-				$oldC = substr($new,2);
-				break;
-			case '\\':
-				$skip = 1;
-				break;
-			default:
-				$skip = 1;
-				break;
-		}
-		if ($skip == 0) {
-			$newC = nl2br(htmlentities($newC));
-			$oldC = nl2br(htmlentities($oldC));
-			$changed[] = array (
-				'oldvalue' => $oldC,
-				'newvalue' => $newC,
-				'change' => $change);
-		}
+	// Include the diff class by Paul Butler (© 2007)
+	include_once ('diff.class.php');
+	// Fetch the changes by calling the diff class
+	$changed = diff($c2n,$c1n);
+	// Instantiate a simple line counter
+	$chline = 0;
+	
+	foreach($changed as $k){
+	    $chline++;
+		if(is_array($k))
+			$ret[] = array('line' => $chline,'body' => (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'').
+				(!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":''));
+		// @TODO: Make the below a setting wether or not to display the non-changed lines.
+		//else $ret[] = array('line' => $chline,'body' => $k);
 	}
 	
 	$result = array (
-		'total' => count($changed),
-		'results' => $changed,
+		'total' => count($ret),
+		'results' => $ret,
 		'xpdoresult' => $rl[0]);
-		
 	echo json_encode($result);
 	
 ?>

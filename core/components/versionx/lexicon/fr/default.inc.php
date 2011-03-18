@@ -39,7 +39,7 @@ $_lang[$vxp.'menuDesc'] = 'Un composant de versioning.';
 $_lang[$vxp.'overviewTitle'] = 'Panorama';
 $_lang[$vxp.'overviewDescription'] = 'VersionX enregistre toutes les modifications de ressources, chunks et snippets et offre la possibilité de restaurer une ancienne version en un clic. Allez sur les onglets relatifs pour plus d\'informations et d\'options.';
 $_lang[$vxp.'devTitle'] = 'Développement';
-$_lang[$vxp.'devDescription'] = 'VersionX a été développé par <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> comme composant de versioning pour <a href="http://www.modxcms.com" title="MODx: Content Management Framework">MODx CMF</a>.<br />
+$_lang[$vxp.'devDescription'] = 'VersionX a été développé par <a href="http://www.markhamstra.nl" title="Mark Hamstra">Mark Hamstra</a> comme composant de versioning pour <a href="http://www.modx.com" title="MODx: Content Management Framework">MODx CMF</a>.<br />
 Veuillez repporter les bugs ou bizarreries sur <a href="https://github.com/Mark-H/VersionX" title="VersionX on Github">Github</a>.';
 	
 // CMP: Resources
@@ -50,7 +50,7 @@ $_lang[$vxp.'resourcesDescription'] = 'VersionX prend soin de votre bien le plus
 $_lang[$vxp.'detailwindow.title'] = 'Version de la ressource';
 $_lang[$vxp.'detailwindow.basictab'] = 'Champs basics';
 $_lang[$vxp.'detailwindow.settingstab'] = 'Propriétés';
-$_lang[$vxp.'detailwindow.contenttab'] = 'Contenu'; // New 14/1/2011
+$_lang[$vxp.'detailwindow.contenttab'] = 'Contenu';
 
 //// Resource compare window
 //$_lang[$vxp.'resources.comparewindow.title'] = ''; 
@@ -60,6 +60,8 @@ $_lang[$vxp.'comparewindow.fields.field'] = 'Champ';
 $_lang[$vxp.'comparewindow.fields.old'] = 'Ancien';
 $_lang[$vxp.'comparewindow.fields.new'] = 'Nouveau';
 $_lang[$vxp.'comparewindow.fields.change'] = 'Changement';
+$_lang[$vxp.'added'] = 'ajouté';
+$_lang[$vxp.'removed'] = 'supprimé';
 
 // CMP: Chunks
 $_lang[$vxp.'chunksTitle'] = 'Chunks';
@@ -89,7 +91,15 @@ $_lang[$vxp.'grid.restoreTitle'] = 'Restorer la version';
 $_lang[$vxp.'grid.restoreMsg'] = 'Êtes-vous sûr de vouloir remplacer la ressource par la version sélectionnée?';
 $_lang[$vxp.'grid.restore.done'] = 'La version a été restorée.';
 
-// CMP: Error messages (New 14/1/2011)
+// CMP: Error messages
 $_lang[$vxp.'error.idnotfound'] = 'Impossible de trouver la révision. Votre table de révisions doit être corrompue.';
 $_lang[$vxp.'error.requestfailed'] = 'Chargement des données requises échoué. Veuillez vérifier votre connection.';
+$_lang[$vxp.'error.packagenotfound'] = 'Erreur fatale: impossible d\'enregistrer le paquet VersionX.';
+$_lang[$vxp.'error.revsnotfound'] = 'Erreur fatale: pas de numéro de version indiqué.';
+$_lang[$vxp.'error.revobjectnotfound'] = 'Erreur fatale: impossible de récupérer la version de l\'objet.';
+$_lang[$vxp.'error.revsdontmatch'] = 'Erreur fatale: les versions indiquées ne correspondent pas à la même ressource.';
+$_lang[$vxp.'error.nochangesfound'] = 'Aucune modification trouvée.';
+
+// (Hopefully) temporary error for xpdorevisioncontrol error for php > 5.3.0
+$_lang[$vxp.'error.splitdepreciated'] = 'Désolé, incompatible avec PHP supérieur à 5.3.0 :(';
 ?>

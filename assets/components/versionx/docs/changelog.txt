@@ -1,23 +1,50 @@
-CHANGELOG VERSIONX
+++++++++++++++++++++++++++++++++++++++++++++
++ VersionX 1.0 Alpha4 (Released 18/3/2011) +
+++++++++++++++++++++++++++++++++++++++++++++
+#018	Include new diff class (© Paul Butler) to serve PHP > 5.3 and provide better listing of changes.
+#039	Retrieve content_type name in getlist processor.
+#038	Use core lexicons for content_disposition values in getlist processor.
+	Updated German (smooth-graphics), French (Romain) and Russian (elastic) translation.
+#036	Add Dutch (Mark-H) and Swedish (frippz) translation to the package. 
+#030	Improve error display when no changes were made (New lexicon string added to English file)
+#019	Fix plugin code to save full timestamp as UNIX timestamp, and format in getlist process.
+#034	Fix lexicon reference for "no" in getlist. Improve content_disposition display.
+	Added copyright notice in Russian translation.
+#037	Update link to modx.com instead of modxcms.com
+#021	Lexicon-ify error messages of processor output. (New lexicon strings added to English file)
+#018	Add check for php >5.3.0 when comparing resource content (prevents E_DEPRECEATED error for split() in xpdorevisioncontrol)
+#021	Encode errors returned by processors to json to prevent ajax loader getting stuck
+	Display template ID in view details when template could not be found
+	Replaced 0 with empty string when no parent exists in view details
+#023	Show parent ID next to title in view details
+#020	Translated resource field names, yes/no and some error messages in revision details window / getlist processor
+#002	Added pagination to resource overview
+	Added Russian translation (elastic)
 
-VersionX 1.0 Beta1 (to be released)
-- Added Russian translation (elastic)
+++++++++++++++++++++++++++++++++++++++++++++
++ VersionX 1.0 Alpha3 (Released 14/1/2011) +
+++++++++++++++++++++++++++++++++++++++++++++
+#013	Added a few more lexicon strings, improved some error handling, improved code readability
+#4/6/14	Updated grid list processor for usability (date formatting, boolean is now yes/no, editedby (and similar) now gives users full name, template shows template name..
+#011	Increased width of modal windows. Moved content to its own tab in view details window.
+#010	Rewrote processor request for restore to make it functional again.
+	Renamed processor files to lowercase to prevent it from failing.
+#015	Removed slash for better path handling (smooth-graphics)
+#9/15	Better distribution of columns in main grid (smooth-graphics)
+#010	Remove mention of an overview from lexicons
+#017	Added changelog to the installer / build
+#013	Changed modified/created/restored values to lexicon references.
 
-VersionX 1.0 Alpha3 (Released 14/1/2010)
-- [#13] Added a few more lexicon strings, improved some error handling, improved code readability
-- [#4/#6/#14] Updated grid list processor for usability (date formatting, boolean is now yes/no, editedby (and similar) now gives users full name, template shows template name..
-- [#11] Increased width of modal windows. Moved content to its own tab in view details window.
-- [#10] Rewrote processor request for restore to make it functional again.
-- Renamed processor files to lowercase to prevent it from failing.
-- [#15] Removed slash for better path handling (smooth-graphics)
-- [#9/#15] Better distribution of columns in main grid (smooth-graphics)
-- [#10] Remove mention of an overview from lexicons
-- [#17] Added changelog to the installer / build
-- [#13] Changed modified/created/restored values to lexicon references.
++++++++++++++++++++++++++++++++++++++++++++++
++ VersionX 1.0 Alpha2 (Released 11/01/2011) +
++++++++++++++++++++++++++++++++++++++++++++++
+#009	Added readme & license
+#008	General improvement lexicon (smooth-graphics)
+	Fixed fatal IE issue (breaking on "class" and "new")
+	Fixed fatal issue when a new resource has been created.
+#003	Added german translation (smooth-graphics)
 
-VersionX 1.0 Alpha2 (Released 11/01/2011)
-- [#9] Added readme & license
-- [#8] General improvement lexicon (smooth-graphics)
-- Fixed fatal IE issue (breaking on "class" and "new")
-- Fixed fatal issue when a new resource has been created.
-- [#3] Added german translation (smooth-graphics)
+++++++++++++++++++++++++++++++++++++++++++++
++ VersionX 1.0 Alpha (Released 09/01/2011) +
+++++++++++++++++++++++++++++++++++++++++++++
+Initial release.

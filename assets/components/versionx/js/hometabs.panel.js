@@ -228,12 +228,12 @@ function resourcewindow(g, eventObj, row) {
 				,items: [{
 					title: _('versionx.detailwindow.basictab') //'Basic Fields'
 					,cls: 'modx-panel'
-					,bodyStyle: 'padding: 10px'
-					,html: '<table><tr><td width="120px">Template</td><td>'+gridrecord.template+'</td></tr><tr><td>Pagetitle</td><td>'+gridrecord.pagetitle+'</td></tr><tr><td>Longtitle</td><td>'+gridrecord.longtitle+'</td></tr><tr><td>Description</td><td>'+gridrecord.description+'</td></tr><tr><td>Alias</td><td>'+gridrecord.alias+'</td></tr><tr><td>Link attributes</td><td>'+gridrecord.link_attributes+'</td></tr><tr><td>Introtext</td><td>'+gridrecord.introtext+'</td></tr><tr><td>Parent</td><td>'+gridrecord.parent+'</td></tr><tr><td>Menutitle</td><td>'+gridrecord.menutitle+'</td></tr><tr><td>Menu index</td><td>'+gridrecord.menuindex+'</td></tr><tr><td>Hide from menu</td><td>'+gridrecord.hidemenu+'</td></tr></td></tr></table>'
+					,bodyStyle: 'padding: 10px' 
+					,html: '<table><tr><td width="170px">'+_('resource_template')+'</td><td>'+gridrecord.template+'</td></tr><tr><td>'+_('resource_pagetitle')+'</td><td>'+gridrecord.pagetitle+'</td></tr><tr><td>'+_('resource_longtitle')+'</td><td>'+gridrecord.longtitle+'</td></tr><tr><td>'+_('resource_description')+'</td><td>'+gridrecord.description+'</td></tr><tr><td>'+_('resource_alias')+'</td><td>'+gridrecord.alias+'</td></tr><tr><td>'+_('resource_link_attributes')+'</td><td>'+gridrecord.link_attributes+'</td></tr><tr><td>'+_('resource_summary')+'</td><td>'+gridrecord.introtext+'</td></tr><tr><td>'+_('resource_parent')+'</td><td>'+gridrecord.parent+'</td></tr><tr><td>'+_('resource_menutitle')+'</td><td>'+gridrecord.menutitle+'</td></tr><tr><td>'+_('resource_menuindex')+'</td><td>'+gridrecord.menuindex+'</td></tr><tr><td>'+_('resource_hide_from_menus')+'</td><td>'+gridrecord.hidemenu+'</td></tr></td></tr></table>'
 				},{
 					title: _('versionx.detailwindow.settingstab') //'Settings'
 					,bodyStyle: 'padding: 10px'
-					,html: '<table><tr><td width="120px">Container?</td><td>'+gridrecord.isfolder+'</td></tr><tr><td>Richtext</td><td>'+gridrecord.richtext+'</td></tr><tr><td>Published on</td><td>'+gridrecord.publishedon+'</td></tr><tr><td>Published by</td><td>'+gridrecord.publishedby+'</td></tr><tr><td>Publish date</td><td>'+gridrecord.pub_date+'</td></tr><tr><td>Unpublish date</td><td>'+gridrecord.unpub_date+'</td></tr><tr><td>Searchable</td><td>'+gridrecord.searchable+'</td></tr><tr><td>Cacheable</td><td>'+gridrecord.cacheable+'</td></tr><tr><td>Deleted</td><td>'+gridrecord.deleted+'</td></tr><tr><td>Content type</td><td>'+gridrecord.content_type+'</td></tr><tr><td>Content disposition</td><td>'+gridrecord.content_dispo+'</td></tr><tr><td>Class key</td><td>'+gridrecord.classKey+'</td></tr></table>'
+					,html: '<table><tr><td width="170px">'+_('resource_folder')+'</td><td>'+gridrecord.isfolder+'</td></tr><tr><td>'+_('resource_richtext')+'</td><td>'+gridrecord.richtext+'</td></tr><tr><td>'+_('resource_publishedon')+'</td><td>'+gridrecord.publishedon+'</td></tr><tr><td>'+_('resource_publishedby')+'</td><td>'+gridrecord.publishedby+'</td></tr><tr><td>'+_('resource_publishdate')+'</td><td>'+gridrecord.pub_date+'</td></tr><tr><td>'+_('resource_unpublishdate')+'</td><td>'+gridrecord.unpub_date+'</td></tr><tr><td>'+_('resource_searchable')+'</td><td>'+gridrecord.searchable+'</td></tr><tr><td>'+_('resource_cacheable')+'</td><td>'+gridrecord.cacheable+'</td></tr><tr><td>'+_('deleted')+'</td><td>'+gridrecord.deleted+'</td></tr><tr><td>'+_('resource_content_type')+'</td><td>'+gridrecord.content_type+'</td></tr><tr><td>'+_('resource_contentdispo')+'</td><td>'+gridrecord.content_dispo+'</td></tr><tr><td>'+_('class_key')+'</td><td>'+gridrecord.classKey+'</td></tr></table>'
 				},{
 					title: _('versionx.detailwindow.contenttab') //'Settings'
 					,bodyStyle: 'padding: 10px'
@@ -344,27 +344,24 @@ VersionX.grid.Resources.CompareContent = function(config) {
 				url: MODx.config.assets_url+'components/versionx/connector.php'
 				,id: 'resourcecomparecontentgrid'
 				,baseParams: { action: 'compareresourcescontent', 'old': fromRev, 'new': newRev }
-				,fields: ["oldvalue","newvalue","change"]
+				,fields: ["line","body"]
 				,paging: false
 				,autosave: false
 				,remoteSort: false
 				,primaryKey: 'oldvalue'
 				,columns: [{
-					header: _('versionx.comparewindow.fields.change')
-					,dataIndex: 'change'
+					header: _('versionx.grid.revNum')
+					,dataIndex: 'line'
 					,sortable: true
+					,width: 10
 				},{
-					header: _('versionx.comparewindow.fields.old')+' (R'+newRev+')'
-					,dataIndex: 'oldvalue'
+					header: _('versionx.comparewindow.contenttab')
+					,dataIndex: 'body'
 					,sortable: true
 					,forceFit: true
-					,width: 100
-				},{
-					header: _('versionx.comparewindow.fields.new')+' (R'+newRev+')'
-					,dataIndex: 'newvalue'
-					,sortable: true
-					,forceFit: true
-				  }]
+					,width: 90
+					,renderer: columnWrap
+				}]
 			});
 		}
 	}
@@ -372,3 +369,6 @@ VersionX.grid.Resources.CompareContent = function(config) {
 };
 Ext.extend(VersionX.grid.Resources.CompareContent,MODx.grid.Grid);
 Ext.reg('versionx-grid-resources-compare-content',VersionX.grid.Resources.CompareContent);
+function columnWrap(val){
+    return '<div style="white-space:normal !important;">'+ val +'</div>';
+}

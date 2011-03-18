@@ -1,6 +1,6 @@
 <?php
-/*
- * VersionX 1.0-beta
+/* 
+ * VersionX 1.0
  *
  * Copyright 2010-2011 by Mark Hamstra (contact via www.markhamstra.nl)
  *
@@ -101,6 +101,13 @@
 		 break;
 	}
 	  $vX_new->set('time', time());
+	  // Create a unix time stamp for the time fields
+	  $vX_new->set('createdon', strtotime($resource->get('createdon')));
+	  $vX_new->set('editedon', time());
+	  $vX_new->set('publishedon', strtotime($resource->get('publishedon')));
+	  $vX_new->set('deletedon', strtotime($resource->get('deletedon')));
+	  $vX_new->set('pub_date', strtotime($resource->get('pub_date')));
+	  $vX_new->set('unpub_date', strtotime($resource->get('unpub_date')));
 	  // Save the new revision.
 	  $vX_new->save();
 	}
