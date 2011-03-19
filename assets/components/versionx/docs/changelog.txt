@@ -3,6 +3,7 @@
 ++++++++++++++++++++++++++++++++++++++++
 #039    Fix fatal issue when a content type has been used that has later been removed.
     Add parameter to js files to ensure updated files get reloaded after update.
+    Fix fatal issue (possibly related to encoding) with German lexicon
 
 ++++++++++++++++++++++++++++++++++++++++++++
 + VersionX 1.0 Alpha4 (Released 18/3/2011) +
