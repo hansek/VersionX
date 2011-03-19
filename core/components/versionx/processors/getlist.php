@@ -138,7 +138,7 @@
 			$resArray['content_type'] = $contentTypes[$ct];
 		} else {
 			$cto = $modx->getObject('modContentType',$ct);
-			if ($cto->get('name')) { 
+            if ($cto) {
 				$ctname = $cto->get('name');
 				$contentTypes[$ct] = $ctname;
 				$resArray['content_type'] = $ctname;

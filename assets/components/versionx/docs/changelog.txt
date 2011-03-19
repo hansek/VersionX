@@ -1,3 +1,8 @@
+++++++++++++++++++++++++++++++++++++++++
++ VersionX 1.0 Alpha5 (To be released) +
+++++++++++++++++++++++++++++++++++++++++
+#039    Fix fatal issue when a content type has been used that has later been removed.
+
 ++++++++++++++++++++++++++++++++++++++++++++
 + VersionX 1.0 Alpha4 (Released 18/3/2011) +
 ++++++++++++++++++++++++++++++++++++++++++++
